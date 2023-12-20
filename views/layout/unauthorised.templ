@@ -1,0 +1,12 @@
+package layout
+
+templ UnauthorisedLayout(title string, comp templ.Component) {
+    <html>
+        <head>
+            <title>{title}</title>
+        </head>
+        <body>
+            @comp
+        </body>
+    </html>
+}
