@@ -24,4 +24,7 @@ generate:
 	@go generate ./...
 	templ generate
 
-.PHONY: build run clean test coverage
+air:
+	@air -c .air.toml
+
+.PHONY: build run clean test coverage generate air

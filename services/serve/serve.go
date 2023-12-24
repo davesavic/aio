@@ -1,20 +1,21 @@
 package serve
 
 import (
-	"github.com/davesavic/aio/views/layout"
-	"github.com/davesavic/aio/views/page"
+	templEngine "github.com/davesavic/aio/services/templ"
+	view "github.com/davesavic/aio/view"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func Run() error {
 	r := gin.New()
+	r.HTMLRender = templEngine.NewRenderer()
 	r.Use(gin.Recovery())
 	r.Use(gin.Logger())
-	r.GET("/", func(context *gin.Context) {
-		layout.UnauthorisedLayout(
-			"Login",
-			page.LoginPage(),
-		).Render(context, context.Writer)
+
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "landing", view.LandingPage())
 	})
+
 	return r.Run()
 }
